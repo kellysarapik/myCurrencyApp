@@ -1,12 +1,12 @@
 package com.kelly.currencyApp.model;
 
-public class Rates {
+public class Currencies {
     private int id;
     private String currency;
     private double eurRate;
 
 
-    public Rates(int id, String currency, double eurRate) {
+    public Currencies(int id, String currency, double eurRate) {
         this.id = id;
         this.currency = currency;
         this.eurRate = eurRate;

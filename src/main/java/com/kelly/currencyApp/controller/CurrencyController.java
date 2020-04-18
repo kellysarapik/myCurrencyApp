@@ -1,19 +1,17 @@
 package com.kelly.currencyApp.controller;
 
-import com.kelly.currencyApp.model.Rates;
+import com.kelly.currencyApp.model.Currencies;
 import com.kelly.currencyApp.repository.CurrencyRepository;
 import com.kelly.currencyApp.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/currency")
-@CrossOrigin("*")
+
 public class CurrencyController {
 
     @Autowired
@@ -23,8 +21,21 @@ public class CurrencyController {
     private CurrencyService currencyService;
 
     @GetMapping("/all")
-    public List<Rates> getCurrencies() {
+    public List<Currencies> getCurrencies() {
         return currencyRepository.fetchAllCurrencies();
     }
 
+    @DeleteMapping("/{currencyId}")
+    public void deleteSingleCurrency(@PathVariable int currencyId) {
+        currencyRepository.removeSingleCurrency(currencyId);
+    }
+@PostMapping("/new")
+    public void addCurrency(@RequestBody Currencies currency) {
+        currencyService.addCurrency(currency);
+    }
+@PostMapping("/edit")
+    public void editCurrency(@RequestBody Currencies currency) {
+        currencyService.editCurrency(currency);
+    }
 }
+
